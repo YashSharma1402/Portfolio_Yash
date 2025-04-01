@@ -7,600 +7,875 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --text-light: #7f8c8d;
+            --primary: #6c5ce7;       /* Lavender purple */
+            --secondary: #a29bfe;     /* Light lavender */
+            --dark: #2d3436;          /* Dark gray */
+            --light: #f5f6fa;         /* Off-white */
+            --accent: #fd79a8;        /* Pink accent */
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: #f5f5f5;
-            color: var(--text-color);
-            line-height: 1.6;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Animated floating bubbles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation div {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            border: 1px solid rgba(162, 155, 254, 0.3);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        /* Header with Profile Photo */
         header {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 2rem 0;
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .profile-container {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-bottom: 2rem;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .profile-pic {
-            width: 150px;
-            height: 150px;
+        .profile-photo {
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--primary-color);
-            margin-bottom: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .header-text {
+            max-width: 600px;
+            text-align: left;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease;
         }
-
-        .tagline {
+        
+        header p {
             font-size: 1.2rem;
-            color: var(--light-color);
-            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
         }
 
         .contact-info {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 1.5rem;
-            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
-
+        
         .contact-info a {
             color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s;
-        }
-
-        .contact-info a:hover {
-            color: var(--primary-color);
-        }
-
-        nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
+            transition: all 0.3s ease;
             padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            border-radius: 30px;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .contact-info a:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255,255,255,0.2);
         }
 
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        section {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            color: var(--secondary-color);
+        /* Project Thumbnails */
+        .project-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
+        .project-thumbnail::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 92, 231, 0.85), rgba(162, 155, 254, 0.85));
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-thumbnail::before {
+            opacity: 0.6;
+        }
+
+        .project-thumbnail i {
+            color: white;
+            font-size: 3rem;
+            z-index: 1;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-thumbnail i {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70%;
             height: 4px;
-            background-color: var(--primary-color);
-            margin: 0.5rem auto 0;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
         }
 
+        /* About section */
         .about-content {
             display: flex;
+            gap: 3rem;
             flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
         }
-
+        
         .about-text {
             flex: 1;
             min-width: 300px;
+            line-height: 1.7;
         }
-
+        
         .skills {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.8rem;
         }
-
-        .skill {
-            background-color: var(--primary-color);
+        
+        .skill-tag {
+            background-color: var(--secondary);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
         }
 
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+            font-size: 1.4rem;
+        }
+        
+        .timeline-content .date {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.7rem;
+            display: block;
+            font-size: 1rem;
+        }
+
+        /* Projects grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
-
+        
         .project-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
         }
-
+        
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
-
-        .project-thumbnail {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-        }
-
+        
         .project-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
-
-        .project-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--secondary-color);
+        
+        .project-info h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-size: 1.4rem;
         }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        
+        .project-info p {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
-
-        .project-links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
+        
+        .project-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .project-link:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 52, 54, 0.2);
         }
 
-        .project-links a:hover {
-            background-color: var(--dark-color);
-        }
-
-        .resume-section {
-            background-color: var(--light-color);
-        }
-
-        .resume-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .resume-column {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .resume-title {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        .resume-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .resume-item-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .resume-item-subtitle {
-            font-size: 1rem;
-            color: var(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .resume-item-date {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .resume-item-description {
-            font-size: 0.95rem;
-        }
-
-        .certifications-list {
-            list-style-type: none;
-        }
-
-        .certifications-list li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .certifications-list li::before {
-            content: "•";
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: -0.3rem;
-        }
-
+        /* Footer */
         footer {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
         }
-
+        
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
-
+        
         .footer-links a {
             color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .resume-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-content {
-                flex-direction: column;
-            }
-        }
-
-        /* Placeholder images for project thumbnails */
-        .thumbnail-placeholder {
-            height: 200px;
-            width: 100%;
-            background-color: #ddd;
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #777;
-            font-size: 1.2rem;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
         }
+        
+        .footer-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .contact-info a {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Animation delays for project cards */
+        .project-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+        .project-card:nth-child(9) { animation-delay: 0.9s; }
+        .project-card:nth-child(10) { animation-delay: 1s; }
     </style>
 </head>
 <body>
+    <!-- Animated background bubbles -->
+    <div class="bg-animation">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <!-- Header with Profile Photo -->
     <header>
-        <div class="container">
-            <div class="profile-container">
-                <!-- Replace with your actual profile image -->
-                <img src="https://via.placeholder.com/150" alt="Yash Sharma" class="profile-pic">
+        <div class="profile-container">
+            <!-- Replace with your photo -->
+            <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" class="profile-photo">
+            <div class="header-text">
                 <h1>Yash Sharma</h1>
-                <p class="tagline">Computer Science Engineer | Cloud Enthusiast | Full Stack Developer</p>
+                <p>Computer Science Student | Full Stack Developer | Cloud Enthusiast</p>
                 <div class="contact-info">
-                    <a href="mailto:Sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i> Sharmayashchd500@gmail.com</a>
-                    <a href="tel:6398497014"><i class="fas fa-phone"></i> 6398497014</a>
-                    <a href="https://linkedin.com/in/yash-sharma-0a3778256" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:6398497014"><i class="fas fa-phone"></i> Call</a>
+                    <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </div>
     </header>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#resume">Resume</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
+    
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a Computer Science Engineering graduate with specialization in Cloud Computing and Virtualization Technology from UPES, Dehradun. Passionate about cloud technologies, full-stack development, and creating efficient solutions.</p>
-                    <p>With hands-on experience in AWS, Docker, Kubernetes, and web development technologies, I enjoy building scalable applications and solving complex problems.</p>
-                    
-                    <h3 style="margin-top: 1.5rem;">Technical Skills</h3>
-                    <div class="skills">
-                        <span class="skill">Java</span>
-                        <span class="skill">Python</span>
-                        <span class="skill">C</span>
-                        <span class="skill">SQL</span>
-                        <span class="skill">JavaScript</span>
-                        <span class="skill">HTML/CSS</span>
-                        <span class="skill">React.js</span>
-                        <span class="skill">AWS</span>
-                        <span class="skill">Docker</span>
-                        <span class="skill">Kubernetes</span>
-                        <span class="skill">GitHub</span>
-                        <span class="skill">Django</span>
+                    <p>I'm a Computer Science student specializing in CCVT at the University of Petroleum Energies and Studies, Dehradun. Passionate about full-stack development, cloud computing, and creating impactful projects that solve real-world problems.</p>
+                    <p>With a strong foundation in both frontend and backend technologies, I enjoy building complete solutions from concept to deployment. My AWS certifications demonstrate my commitment to cloud technologies and scalable architectures.</p>
+                </div>
+                <div class="skills">
+                    <div class="skill-category">
+                        <h3>Databases & Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Developer Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English Fluency</span>
+                            <span class="skill-tag">Detail Oriented</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Teaching</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+        
+        <!-- Education & Experience -->
+        <section id="timeline">
+            <h2>Education & Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>B.Tech. in Computer Science (CCVT)</h3>
+                        <span class="date">2022 - 2026</span>
+                        <p>University of Petroleum Energies and Studies, Dehradun</p>
+                        <p>CGPA: 7.3</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Higher Secondary School</h3>
+                        <span class="date">2018 - 2019</span>
+                        <p>R.R.K Sr Sec School></p>
+                        <p>Percentage: 90%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Secondary High School</h3>
+                        <span class="date">2020 - 2021</span>
+                        <p>R.R.K Sr Sec School</p>
+                        <p>Percentage: 94.8%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Srijan Social Intern</h3>
+                        <span class="date">June 2023 - July 2023</span>
+                        <p>Manav Seva Yog Kendra</p>
+                        <p>The internship focused on‬
+‭ empowering kids for increasing their yoga and meditation practices for health benefits.‬
+‭</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <!-- Projects -->
+<section id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+        <!-- Docker Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Containerized SQL</h3>
+                <p>Docker container setup for SQL databases with persistent storage.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" target="_blank">View Project</a>
+            </div>
         </div>
-    </section>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Bake</h3>
+                <p>Automated Docker image building with multiple configurations.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Bridge Networking</h3>
+                <p>Implementation of Docker bridge networking for container communication.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Swarm Microservices</h3>
+                <p>Microservices architecture deployed using Docker Swarm.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Volume Persistence</h3>
+                <p>Implementing persistent storage solutions with Docker volumes.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Dockerized Streamlit</h3>
+                <p>Streamlit development environment containerized with Docker.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized_Streamlit_Development" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">My Projects</h2>
+        <!-- Kubernetes Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp');">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <div class="project-info">
+                <h3>MiniKube and Kubectl</h3>
+                <p>Local Kubernetes cluster setup and management with MiniKube.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp');">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <div class="project-info">
+                <h3>Minikube Microservices</h3>
+                <p>Microservices deployment on Minikube Kubernetes cluster.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Python Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png');">
+                <i class="fab fa-python"></i>
+            </div>
+            <div class="project-info">
+                <h3>Python Logging in Docker</h3>
+                <p>Implementing Python logging solutions within Docker containers.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Streamlit Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit EC2</h3>
+                <p>Deploying Streamlit applications on AWS EC2 instances.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Deploying%20a%20Streamlit%20App%20in%20Docker%20on%20AWS%20EC2" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card"> 
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit Hello World</h3>
+                <p>Basic Streamlit application demonstrating core features.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit App</h3>
+                <p>Custom Streamlit application with interactive components.</p>
+                <a href="https://docknest-ypsrcfmkvjokuc2dnmpcm8.streamlit.app/" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Database Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/PostgreSQL-Logo-500x313.webp');">
+                <i class="fas fa-database"></i>
+            </div>
+            <div class="project-info">
+                <h3>SQL PostgreSQL</h3>
+                <p>PostgreSQL database implementations and queries.</p>
+                <a href="" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- ML Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp');">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="project-info">
+                <h3>Titanic Prediction Model</h3>
+                <p>Machine learning model predicting Titanic survival rates.</p>
+                <a href=" https://github.com/YashSharma1402/DockStation/tree/main/Titanic%20Survival%20Predictor" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp');">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="project-info">
+                <h3>Evidently AI</h3>
+                <p>Machine learning model monitoring and evaluation with Evidently AI.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/%20Evidently%20AI%20Sets%20Sail%20in%20Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Featured Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Job+Portal');">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="project-info">
+                <h3>HiredHub Job Portal</h3>
+                <p>Django-based job searching platform with user authentication.</p>
+                <a href="#" class="project-link">View Details</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Code+Organizer');">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="project-info">
+                <h3>Code Snippet Organizer</h3>
+                <p>Tool for developers to store and organize code snippets (Ongoing).</p>
+                <a href="#" class="project-link">View Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- Multi-Page Streamlit App -->
+<div class="project-card featured-project">
+    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png');">
+        <i class="fas fa-layer-group"></i>
+    </div>
+    <div class="project-info">
+        <h3>ML Pipeline Dashboard</h3>
+        <p class="featured-badge">Featured Project</p>
+        <p>A multi-container Streamlit application with:</p>
+        <ul>
+            <li>Data preprocessing pipeline</li>
+            <li>Model training interface</li>
+            <li>SHAP explainability dashboard</li>
+            <li>Dockerized microservices</li>
+        </ul>
+        <div class="project-links">
+            <a href="https://multipage-application.onrender.com/" class="project-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/ritu-pixel/MultiPage-" class="project-link github-link" target="_blank">
+                <i class="fab fa-github"></i> Source Code
+            </a>
+        </div>
+    </div>
+</div>       
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2>Certifications</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <div class="thumbnail-placeholder">Docker Bake</div>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
                     <div class="project-info">
-                        <h3 class="project-title">Docker Bake</h3>
-                        <p> Powerful tool that simplifies the process of building and managing multi-platform Docker images </p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker Bake" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
+                        <h3>AWS Practitioner Essentials</h3>
+                        <p>AWS Academy Graduate - Cloud Practitioner Essentials</p>
                     </div>
                 </div>
-
-                <!-- Project 2 -->
                 <div class="project-card">
-                    <div class="thumbnail-placeholder">Evidently AI in Docker</div>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
                     <div class="project-info">
-                        <h3 class="project-title">Evidently AI Sets Sail in Docker</h3>
-                        <p>Containerized solution for deploying Evidently AI monitoring tools in Docker environments.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
+                        <h3>AWS Cloud Architecting</h3>
+                        <p>AWS Academy Graduate - Cloud Architecting</p>
                     </div>
                 </div>
-
-                <!-- Project 3 -->
                 <div class="project-card">
-                    <div class="thumbnail-placeholder">Containerized MySQL</div>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
                     <div class="project-info">
-                        <h3 class="project-title">Containerized MySQL</h3>
-                        <p>MySQL database deployment in Docker containers with persistent storage configuration.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
+                        <h3>AWS Intro to Cloud</h3>
+                        <p>AWS Academy Graduate - Introduction to Cloud</p>
                     </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="thumbnail-placeholder">Streamlit on AWS EC2</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Deploying a Streamlit App in Docker on AWS EC2</h3>
-                        <p>End-to-end guide for containerizing Streamlit applications and deploying on AWS infrastructure.</p>
-                        <div class="project-links">
-                            <a href="https://docknest-f8eetapwmdhhe6jvjmjgs9.streamlit.app/" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="project-card">
-                    <div class="thumbnail-placeholder">Docker Swarm</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Docker swarm /microservices-docker-swarm</h3>
-                        <p>Microservices architecture implementation using Docker Swarm for orchestration.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker swarm" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6 -->
-                <div class="project-card">
-                    <div class="thumbnail-placeholder">Minikube MicroServices</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Minikube MicroServices/microservices-project</h3>
-                        <p>Local Kubernetes development environment setup with Minikube for microservices.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube MicroServices" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 7 -->
-                <div class="project-card">
-                    <div class="thumbnail-placeholder">Python-logging-Docker</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Python-logging-Docker</h3>
-                        <p>Implementing Python Logging Solutions Within Docker Containers.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-
-    <section id="resume" class="resume-section">
-        <div class="container">
-            <h2 class="section-title">My Resume</h2>
-            <div class="resume-container">
-                <div class="resume-column">
-                    <h3 class="resume-title">Education</h3>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">B.Tech. in Computer Science (CCVT)</h4>
-                        <p class="resume-item-subtitle">University of Petroleum and Energy Studies, Dehradun</p>
-                        <p class="resume-item-date">CGPA: 7.3</p>
-                    </div>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">Higher Secondary School</h4>
-                        <p class="resume-item-subtitle">R.R.K Senior Secondary School, Chandausi</p>
-                        <p class="resume-item-date">Percentage: 90%</p>
-                    </div>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">Secondary High School</h4>
-                        <p class="resume-item-subtitle">R.R.K Senior Secondary School, Chandausi</p>
-                        <p class="resume-item-date">Percentage: 94.8%</p>
-                    </div>
-                    
-                    <h3 class="resume-title" style="margin-top: 2rem;">Experience</h3>
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">Srijan Social Intern</h4>
-                        <p class="resume-item-date">June 2024 - July 2024</p>
-                        <p class="resume-item-description">
-                            Participated in Srijan Social Internship focused on empowering kids through yoga and meditation practices for health benefits.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="resume-column">
-                    <h3 class="resume-title">Projects</h3>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">Hired Hub - Job Searching Portal</h4>
-                        <p class="resume-item-subtitle">HTML, CSS, Python, Django</p>
-                        <p class="resume-item-date">Aug 2024 - December 2024</p>
-                        <p class="resume-item-description">
-                            Developed a dynamic job portal platform using Django with user authentication, database management, and secure login/sign-up pages. Integrated cloud services for optimized performance and scalability.
-                        </p>
-                    </div>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">E-commerce Website</h4>
-                        <p class="resume-item-subtitle">HTML, CSS, JavaScript</p>
-                        <p class="resume-item-date">April 2024</p>
-                        <p class="resume-item-description">
-                            Developed a full-stack e-commerce platform for apparel shopping with product listing, search functionality, and secure checkout. Implemented user authentication and admin dashboard for managing products and orders.
-                        </p>
-                    </div>
-                    
-                    <div class="resume-item">
-                        <h4 class="resume-item-title">Code Snippet Organizer</h4>
-                        <p class="resume-item-subtitle">Ongoing Project</p>
-                        <p class="resume-item-description">
-                            Developing a web-based application for managing and organizing reusable code snippets efficiently with support for multiple programming languages, advanced search, and user authentication.
-                        </p>
-                    </div>
-                    
-                    <h3 class="resume-title" style="margin-top: 2rem;">Certifications</h3>
-                    <ul class="certifications-list">
-                        <li>AWS Cloud Practitioner Essentials</li>
-                        <li>AWS Academy Graduate - AWS Academy Cloud Architecting</li>
-                        <li>AWS Academy Graduate - AWS Academy Introduction to Cloud</li>
-                        <li>AWS Cloud Quest - Cloud Practitioners Essential</li>
-                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <p>I'm currently looking for new opportunities and would love to hear from you. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-                <div style="margin-top: 2rem;">
-                    <a href="mailto:Sharmayashchd500@gmail.com" style="display: inline-block; padding: 1rem 2rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: background-color 0.3s;">Send Me an Email</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+        </section>
+    </div>
+    
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="https://linkedin.com/in/yash-sharma-0a3778256" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:Sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="tel:6398497014"><i class="fas fa-phone"></i></a>
-            </div>
-            <p class="copyright">© 2024 Yash Sharma. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:6398497014"><i class="fas fa-phone"></i></a>
+            <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i></a>
         </div>
+        <p>&copy; 2024 Yash Sharma. All rights reserved.</p>
     </footer>
+    
+    <script>
+        // Animate timeline items when they come into view
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
