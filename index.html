@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harsh Jindal - Portfolio</title>
+    <title>Yash Sharma - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -468,22 +468,40 @@
         .project-card:nth-child(9) { animation-delay: 0.9s; }
         .project-card:nth-child(10) { animation-delay: 1s; }
 
-        /* Additional styles for Harsh's content */
-        .personal-details {
+        /* Featured project styles */
+        .featured-project {
+            grid-column: 1 / -1;
             display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+            flex-direction: column;
+        }
+        
+        .featured-project .project-thumbnail {
+            height: 300px;
+        }
+        
+        .featured-badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
             margin-top: 1rem;
         }
         
-        .personal-details div {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .github-link {
+            background-color: var(--dark);
         }
         
-        .personal-details i {
-            color: var(--accent);
+        .github-link:hover {
+            background-color: #1a1e21;
         }
     </style>
 </head>
@@ -500,20 +518,15 @@
     <!-- Header with Profile Photo -->
     <header>
         <div class="profile-container">
-            <!-- Replace with your photo -->
-            <img src="https://via.placeholder.com/300" class="profile-photo" alt="Harsh Jindal">
+            <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" class="profile-photo" alt="Yash Sharma">
             <div class="header-text">
-                <h1>Harsh Jindal</h1>
-                <p>Computer Science Student | Cloud Computing Specialist | Web Developer</p>
+                <h1>Yash Sharma</h1>
+                <p>Computer Science Student | Full Stack Developer | Cloud Enthusiast</p>
                 <div class="contact-info">
-                    <a href="mailto:Jindalharsh457@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="tel:+9198976730B1"><i class="fas fa-phone"></i> Call</a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </div>
-                <div class="personal-details">
-                    <div><i class="fas fa-birthday-cake"></i> January 18, 2003</div>
-                    <div><i class="fas fa-map-marker-alt"></i> Meerut, Uttar Pradesh, India</div>
+                    <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:6398497014"><i class="fas fa-phone"></i> Call</a>
+                    <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </div>
@@ -525,42 +538,38 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm a passionate Computer Science student specializing in Cloud Computing and Virtualization Technology at UPES, Dehradun. With hands-on experience in cloud infrastructure and web development, I create innovative solutions for modern challenges.</p>
-                    <p>My projects and internships reflect my dedication to leveraging technology for impactful results. I'm particularly interested in the intersection of cloud technologies and web applications to build scalable, efficient solutions.</p>
+                    <p>I'm a Computer Science student specializing in CCVT at the University of Petroleum Energies and Studies, Dehradun. Passionate about full-stack development, cloud computing, and creating impactful projects that solve real-world problems.</p>
+                    <p>With a strong foundation in both frontend and backend technologies, I enjoy building complete solutions from concept to deployment. My AWS certifications demonstrate my commitment to cloud technologies and scalable architectures.</p>
                 </div>
                 <div class="skills">
                     <div class="skill-category">
-                        <h3>Programming Languages</h3>
+                        <h3>Databases & Languages</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">C</span>
-                            <span class="skill-tag">Python</span>
                             <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
                         </div>
                     </div>
                     <div class="skill-category">
-                        <h3>Cloud Tools</h3>
+                        <h3>Developer Tools</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Git</span>
                         </div>
                     </div>
                     <div class="skill-category">
-                        <h3>Web Development</h3>
+                        <h3>Soft Skills</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">HTML</span>
-                            <span class="skill-tag">CSS</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">AngularJS</span>
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">Flask</span>
-                            <span class="skill-tag">MongoDB</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">English</span>
-                            <span class="skill-tag">Hindi</span>
+                            <span class="skill-tag">English Fluency</span>
+                            <span class="skill-tag">Detail Oriented</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Teaching</span>
                         </div>
                     </div>
                 </div>
@@ -573,36 +582,34 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>B.Tech in Computer Science (CCVT)</h3>
-                        <span class="date">2022 – 2026 (Pursuing)</span>
-                        <p>UPES, Dehradun</p>
-                        <p>Specializing in Cloud Computing & Virtualization Technology</p>
-                        <p>CGPA: 7.7</p>
+                        <h3>B.Tech. in Computer Science (CCVT)</h3>
+                        <span class="date">2022 - 2026</span>
+                        <p>University of Petroleum Energies and Studies, Dehradun</p>
+                        <p>CGPA: 7.3</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h3>Higher Secondary School</h3>
-                        <span class="date">2020 – 2021</span>
-                        <p>K.I. International School</p>
-                        <p>Grade: 91% (CBSE)</p>
+                        <span class="date">2018 - 2019</span>
+                        <p>R.R.K Sr Sec School</p>
+                        <p>Percentage: 90%</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>Secondary School</h3>
-                        <span class="date">2018 – 2019</span>
-                        <p>K.I. International School</p>
-                        <p>Grade: 93.8% (CBSE)</p>
+                        <h3>Secondary High School</h3>
+                        <span class="date">2020 - 2021</span>
+                        <p>R.R.K Sr Sec School</p>
+                        <p>Percentage: 94.8%</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>Social Internship</h3>
-                        <span class="date">May 2023 – July 2023</span>
-                        <p>Come On India (Regd. NGO)</p>
-                        <p>• Designed academic and co-curricular plans for enhanced learning of underprivileged children</p>
-                        <p>• Helped communities through education, healthcare, and essential services</p>
+                        <h3>Srijan Social Intern</h3>
+                        <span class="date">June 2023 - July 2023</span>
+                        <p>Manav Seva Yog Kendra</p>
+                        <p>The internship focused on empowering kids for increasing their yoga and meditation practices for health benefits.</p>
                     </div>
                 </div>
             </div>
@@ -612,116 +619,234 @@
         <section id="projects">
             <h2>My Projects</h2>
             <div class="projects-grid">
+                <!-- Docker Projects -->
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Sports+Connect');">
-                        <i class="fas fa-running"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Sports-Connect Project</h3>
-                        <p>A platform connecting sports enthusiasts for matches and events.</p>
-                        <a href="#" class="project-link">View Details</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Skill+Swap');">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Skill-Swap Project</h3>
-                        <p>A platform for users to exchange skills and knowledge.</p>
-                        <a href="#" class="project-link">View Details</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Urban+Health');">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Urban Health Research</h3>
-                        <p>Paper on improving urban health by addressing lack of green spaces.</p>
-                        <a href="#" class="project-link">View Paper</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Streamlit');">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Streamlit Visualization</h3>
-                        <p>Data visualization project using Streamlit framework.</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Docker');">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp');">
                         <i class="fab fa-docker"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Docker Project</h3>
-                        <p>Containerization solution for application deployment.</p>
-                        <a href="#" class="project-link">View Project</a>
+                        <h3>Containerized SQL</h3>
+                        <p>Docker container setup for SQL databases with persistent storage.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" target="_blank" class="project-link">View Project</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=AI+Cloud');">
-                        <i class="fas fa-cloud"></i>
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp');">
+                        <i class="fab fa-docker"></i>
                     </div>
                     <div class="project-info">
-                        <h3>AI in Cloud Infrastructure</h3>
-                        <p>Paper on enhancing resource efficiency with AI in cloud computing.</p>
-                        <a href="#" class="project-link">View Paper</a>
+                        <h3>Docker Bake</h3>
+                        <p>Automated Docker image building with multiple configurations.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" class="project-link" target="_blank">View Project</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Binary+Classification');">
-                        <i class="fas fa-project-diagram"></i>
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp');">
+                        <i class="fab fa-docker"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Binary Classification WebApp</h3>
-                        <p>Dockerized web application for binary classification tasks.</p>
-                        <a href="#" class="project-link">View Project</a>
+                        <h3>Docker Bridge Networking</h3>
+                        <p>Implementation of Docker bridge networking for container communication.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp');">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Docker Swarm Microservices</h3>
+                        <p>Microservices architecture deployed using Docker Swarm.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp');">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Docker Volume Persistence</h3>
+                        <p>Implementing persistent storage solutions with Docker volumes.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Dockerized Streamlit</h3>
+                        <p>Streamlit development environment containerized with Docker.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized_Streamlit_Development" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Kubernetes Projects -->
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp');">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>MiniKube and Kubectl</h3>
+                        <p>Local Kubernetes cluster setup and management with MiniKube.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp');">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Minikube Microservices</h3>
+                        <p>Microservices deployment on Minikube Kubernetes cluster.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Python Projects -->
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png');">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Python Logging in Docker</h3>
+                        <p>Implementing Python logging solutions within Docker containers.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Streamlit Projects -->
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp');">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Streamlit EC2</h3>
+                        <p>Deploying Streamlit applications on AWS EC2 instances.</p>
+                        <a href="https://dockstation-uep5ttav8krlr2cp5ekgvu.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card"> 
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp');">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Streamlit Hello World</h3>
+                        <p>Basic Streamlit application demonstrating core features.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Streamlit App</h3>
+                        <p>Custom Streamlit application with interactive components.</p>
+                        <a href="https://dockstation-zgddkv5rsyqhkgq2l6d6mq.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Database Projects -->
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/PostgreSQL-Logo-500x313.webp');">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>SQL PostgreSQL</h3>
+                        <p>PostgreSQL database implementations and queries.</p>
+                        <a href="" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- ML Projects -->
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp');">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Titanic Prediction Model</h3>
+                        <p>Machine learning model predicting Titanic survival rates.</p>
+                        <a href="https://dockstation-nuaxvofk77zcggdsixfzwk.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp');">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Evidently AI</h3>
+                        <p>Machine learning model monitoring and evaluation with Evidently AI.</p>
+                        <a href="https://github.com/YashSharma1402/DockStation/tree/main/%20Evidently%20AI%20Sets%20Sail%20in%20Docker" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Featured Project -->
+                <div class="project-card featured-project">
+                    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png');">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>ML Pipeline Dashboard</h3>
+                        <p class="featured-badge">Featured Project</p>
+                        <p>A multi-container Streamlit application with:</p>
+                        <ul>
+                            <li>Data preprocessing pipeline</li>
+                            <li>Model training interface</li>
+                            <li>SHAP explainability dashboard</li>
+                            <li>Dockerized microservices</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://multipage-application.onrender.com/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/ritu-pixel/MultiPage-" class="project-link github-link" target="_blank">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Interests -->
-        <section id="interests">
-            <h2>Interests</h2>
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2>Certifications</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Traveling');">
-                        <i class="fas fa-globe-asia"></i>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Traveling</h3>
-                        <p>Exploring new places and cultures.</p>
+                        <h3>AWS Practitioner Essentials</h3>
+                        <p>AWS Academy Graduate - Cloud Practitioner Essentials</p>
                     </div>
                 </div>
-                
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Photography');">
-                        <i class="fas fa-camera"></i>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Photography</h3>
-                        <p>Capturing moments and creative expressions.</p>
+                        <h3>AWS Cloud Architecting</h3>
+                        <p>AWS Academy Graduate - Cloud Architecting</p>
                     </div>
                 </div>
-                
                 <div class="project-card">
-                    <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Chess');">
-                        <i class="fas fa-chess"></i>
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Chess</h3>
-                        <p>Strategic thinking and problem solving.</p>
+                        <h3>AWS Intro to Cloud</h3>
+                        <p>AWS Academy Graduate - Introduction to Cloud</p>
                     </div>
                 </div>
             </div>
@@ -731,12 +856,12 @@
     <!-- Footer -->
     <footer>
         <div class="footer-links">
-            <a href="mailto:Jindalharsh457@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+9198976730B1"><i class="fas fa-phone"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:6398497014"><i class="fas fa-phone"></i></a>
+            <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-        <p>&copy; 2024 Harsh Jindal. All rights reserved.</p>
+        <p>&copy; 2024 Yash Sharma. All rights reserved.</p>
     </footer>
     
     <script>
