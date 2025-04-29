@@ -1,626 +1,881 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yash Sharma - Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Sharma - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;       /* Lavender purple */
+            --secondary: #a29bfe;     /* Light lavender */
+            --dark: #2d3436;          /* Dark gray */
+            --light: #f5f6fa;         /* Off-white */
+            --accent: #fd79a8;        /* Pink accent */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Animated floating bubbles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation div {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            border: 1px solid rgba(162, 155, 254, 0.3);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+        /* Header with Profile Photo */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .header-text {
+            max-width: 600px;
+            text-align: left;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .contact-info a:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Project Thumbnails */
+        .project-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+        .project-thumbnail::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 92, 231, 0.85), rgba(162, 155, 254, 0.85));
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-thumbnail::before {
+            opacity: 0.6;
+        }
+
+        .project-thumbnail i {
+            color: white;
+            font-size: 3rem;
+            z-index: 1;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-thumbnail i {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            line-height: 1.7;
+        }
+        
+        .skills {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+            font-size: 1.4rem;
+        }
+        
+        .timeline-content .date {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.7rem;
+            display: block;
+            font-size: 1rem;
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-info {
+            padding: 1.8rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        
+        .project-info p {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .project-link:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 52, 54, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .contact-info a {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Animation delays for project cards */
+        .project-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+        .project-card:nth-child(9) { animation-delay: 0.9s; }
+        .project-card:nth-child(10) { animation-delay: 1s; }
+    </style>
 </head>
-
 <body>
-
-  <main>
-
-    <!-- Sidebar -->
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" alt="Yash Sharma" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Yash Sharma">Yash Sharma</h1>
-          <p class="title">Cloud Enthusiast</p>
+    <!-- Animated background bubbles -->
+    <div class="bg-animation">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <!-- Header with Profile Photo -->
+    <header>
+        <div class="profile-container">
+            <!-- Replace with your photo -->
+            <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" class="profile-photo">
+            <div class="header-text">
+                <h1>Yash Sharma</h1>
+                <p>Computer Science Student | Full Stack Developer | Cloud Enthusiast</p>
+                <div class="contact-info">
+                    <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:6398497014"><i class="fas fa-phone"></i> Call</a>
+                    <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
+    </header>
+    
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Computer Science student specializing in CCVT at the University of Petroleum Energies and Studies, Dehradun. Passionate about full-stack development, cloud computing, and creating impactful projects that solve real-world problems.</p>
+                    <p>With a strong foundation in both frontend and backend technologies, I enjoy building complete solutions from concept to deployment. My AWS certifications demonstrate my commitment to cloud technologies and scalable architectures.</p>
+                </div>
+                <div class="skills">
+                    <div class="skill-category">
+                        <h3>Databases & Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Developer Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English Fluency</span>
+                            <span class="skill-tag">Detail Oriented</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Teaching</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="mailto:sharmayashchd500@gmail.com" class="contact-link">sharmayashchd500@gmail.com</a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-              <a href="tel:+916398497014" class="contact-link">+91 6398497014</a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-              <time datetime="2003-01-18">January 18, 2003</time>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Dehradun, India</address>
-            </div>
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://github.com/YashSharma1402" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-        </ul>
-
-      </div>
-
-    </aside>
-
-    <!-- Main Content -->
-    <div class="main-content">
-
-      <!-- Navbar -->
-      <nav class="navbar">
-        <ul class="navbar-list">
-          <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>About</button>
-          </li>
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Project</button>
-          </li>
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- About Page -->
-      <article class="about active" data-page="about">
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-      
-        <section class="about-text">
-          <p>
-            Hey! I'm Yash Sharma, a passionate Computer Science student specializing in Cloud Computing and Virtualization Technology at UPES, Dehradun.
-          </p>
-      
-          <p>
-            With hands-on experience in cloud infrastructure and web development, I create innovative solutions for modern challenges. My projects and internships reflect my dedication to leveraging technology for impactful results.
-          </p>
-      
-          <h3>Programming Languages:</h3>
-          <p>C, Python, Java</p>
-      
-          <h3>Profile:</h3>
-          <p>Cloud Computing & Virtualization Technology</p>
-      
-          <h3>Education:</h3>
-          <p>Bachelor of Technology</p>
-      
-          <h3>Languages:</h3>
-          <p>English, Hindi</p>
-      
-          <h3>Cloud Tools:</h3>
-          <p>AWS, Azure</p>
-      
-          <h3>Web Development & Frameworks:</h3>
-          <p>HTML, CSS, JavaScript, AngularJS, Node.js, Flask, MongoDB</p>
-      
-          <h3>Interests:</h3>
-          <p>Traveling, Photography, Chess</p>
-        </section>
-      </article>
-
-      <!-- Resume Page -->
-      <article class="resume" data-page="resume">
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">UPES, Dehradun</h4>
-              <span>2022 – 2026 (Pursuing)</span>
-              <p class="timeline-text">
-                B.Tech CSE with specialization in Cloud Computing & Virtualization Technology
-              </p>
-              <p class="timeline-text">
-                CGPA: 7.7
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">R.R.K Sr Sec School</h4>
-              <span>2020 – 2021</span>
-              <p class="timeline-text">
-                Higher Secondary School
-              </p>
-              <p class="timeline-text">
-                Grade: 90% (CBSE)
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">R.R.K Sr Sec School</h4>
-              <span>2018 – 2019</span>
-              <p class="timeline-text">
-                Secondary School
-              </p>
-              <p class="timeline-text">
-                Grade: 94.8% (CBSE)
-              </p>
-            </li>
-          </ol>
-        </section>
-
-        <section class="timeline">
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-            <h3 class="h3">Experience</h3>
-          </div>
-
-          <ol class="timeline-list">
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Social Internship</h4>
-              <span>June 2023 - July 2023</span>
-              <p class="timeline-text">
-                Manav Seva Yog Kendra
-              </p>
-              <p class="timeline-text">
-                • Empowered kids through yoga and meditation practices
-              </p>
-            </li>
-          </ol>
-        </section>
-
-        <section class="skill">
-          <h3 class="h3 skills-title">My Skills</h3>
-          
-          <ul class="skills-list content-card">
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Cloud Infrastructure</h5>
-                <data value="85">85%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 85%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">AWS & Azure Tools</h5>
-                <data value="80">80%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Web Development</h5>
-                <data value="75">75%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 75%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Docker & Kubernetes</h5>
-                <data value="70">70%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Python Programming</h5>
-                <data value="80">80%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-            </li>
-          </ul>
         </section>
         
-        <section class="resume-download">
-          <a href="#" target="_blank" class="resume-button">
-            Download Resume
-          </a>
-        </section>
-      </article>
-
-      <!-- Projects Page -->
-      <article class="project" data-page="project">
-        <header>
-          <h2 class="h2 article-title">Projects</h2>
-        </header>
-      
-        <section class="projects">
-          <div class="filter-select-box">
-            <button class="filter-select" data-select>
-              <div class="select-value" data-selecct-value>Select category</div>
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-            </button>
-      
-            <ul class="select-list">
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-              <li class="select-item">
-                <button data-select-item>Projects</button>
-              </li>
-              <li class="select-item">
-                <button data-select-item>Docker</button>
-              </li>
-              <li class="select-item">
-                <button data-select-item>Machine Learning</button>
-              </li>
-            </ul>
-          </div>
-      
-          <ul class="project-list">
-            <!-- Containerized SQL -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp" alt="Containerized SQL" loading="lazy">
-                </figure>
-                <h3 class="project-title">Containerized SQL</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Docker Bake -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp" alt="Docker Bake" loading="lazy">
-                </figure>
-                <h3 class="project-title">Docker Bake</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Docker Bridge Networking -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp" alt="Docker Bridge Networking" loading="lazy">
-                </figure>
-                <h3 class="project-title">Docker Bridge Networking</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Docker Swarm Microservices -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp" alt="Docker Swarm Microservices" loading="lazy">
-                </figure>
-                <h3 class="project-title">Docker Swarm Microservices</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Docker Volume Persistence -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp" alt="Docker Volume Persistence" loading="lazy">
-                </figure>
-                <h3 class="project-title">Docker Volume Persistence</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Dockerized Streamlit -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized_Streamlit_Development" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp" alt="Dockerized Streamlit" loading="lazy">
-                </figure>
-                <h3 class="project-title">Dockerized Streamlit</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- MiniKube and Kubectl -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp" alt="MiniKube and Kubectl" loading="lazy">
-                </figure>
-                <h3 class="project-title">MiniKube and Kubectl</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Minikube Microservices -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp" alt="Minikube Microservices" loading="lazy">
-                </figure>
-                <h3 class="project-title">Minikube Microservices</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Python Logging in Docker -->
-            <li class="project-item active" data-filter-item data-category="docker">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png" alt="Python Logging in Docker" loading="lazy">
-                </figure>
-                <h3 class="project-title">Python Logging in Docker</h3>
-                <p class="project-category">Docker</p>
-              </a>
-            </li>
-            
-            <!-- Streamlit EC2 -->
-            <li class="project-item active" data-filter-item data-category="projects">
-              <a href="https://dockstation-uep5ttav8krlr2cp5ekgvu.streamlit.app/" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp" alt="Streamlit EC2" loading="lazy">
-                </figure>
-                <h3 class="project-title">Streamlit EC2</h3>
-                <p class="project-category">Project</p>
-              </a>
-            </li>
-            
-            <!-- Streamlit Hello World -->
-            <li class="project-item active" data-filter-item data-category="projects">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp" alt="Streamlit Hello World" loading="lazy">
-                </figure>
-                <h3 class="project-title">Streamlit Hello World</h3>
-                <p class="project-category">Project</p>
-              </a>
-            </li>
-            
-            <!-- Streamlit App -->
-            <li class="project-item active" data-filter-item data-category="projects">
-              <a href="https://dockstation-zgddkv5rsyqhkgq2l6d6mq.streamlit.app/" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp" alt="Streamlit App" loading="lazy">
-                </figure>
-                <h3 class="project-title">Streamlit App</h3>
-                <p class="project-category">Project</p>
-              </a>
-            </li>
-            
-            <!-- SQL PostgreSQL -->
-            <li class="project-item active" data-filter-item data-category="projects">
-              <a href="#" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/PostgreSQL-Logo-500x313.webp" alt="SQL PostgreSQL" loading="lazy">
-                </figure>
-                <h3 class="project-title">SQL PostgreSQL</h3>
-                <p class="project-category">Project</p>
-              </a>
-            </li>
-            
-            <!-- Titanic Prediction Model -->
-            <li class="project-item active" data-filter-item data-category="machine learning">
-              <a href="https://dockstation-nuaxvofk77zcggdsixfzwk.streamlit.app/" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp" alt="Titanic Prediction Model" loading="lazy">
-                </figure>
-                <h3 class="project-title">Titanic Prediction Model</h3>
-                <p class="project-category">Machine Learning</p>
-              </a>
-            </li>
-            
-            <!-- Evidently AI -->
-            <li class="project-item active" data-filter-item data-category="machine learning">
-              <a href="https://github.com/YashSharma1402/DockStation/tree/main/%20Evidently%20AI%20Sets%20Sail%20in%20Docker" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp" alt="Evidently AI" loading="lazy">
-                </figure>
-                <h3 class="project-title">Evidently AI</h3>
-                <p class="project-category">Machine Learning</p>
-              </a>
-            </li>
-            
-            <!-- ML Pipeline Dashboard -->
-            <li class="project-item active" data-filter-item data-category="machine learning">
-              <a href="https://multipage-application.onrender.com/" target="_blank">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png" alt="ML Pipeline Dashboard" loading="lazy">
-                </figure>
-                <h3 class="project-title">ML Pipeline Dashboard</h3>
-                <p class="project-category">Featured Project</p>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </article>
-
-      <!-- Contact Page -->
-      <article class="contact" data-page="contact">
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.22709306743!2d76.68831253413684!3d30.732254422310067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1745775476622!5m2!1sen!2sin" 
-              width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form">
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+        <!-- Education & Experience -->
+        <section id="timeline">
+            <h2>Education & Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>B.Tech. in Computer Science (CCVT)</h3>
+                        <span class="date">2022 - 2026</span>
+                        <p>University of Petroleum Energies and Studies, Dehradun</p>
+                        <p>CGPA: 7.3</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Higher Secondary School</h3>
+                        <span class="date">2018 - 2019</span>
+                        <p>R.R.K Sr Sec School></p>
+                        <p>Percentage: 90%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Secondary High School</h3>
+                        <span class="date">2020 - 2021</span>
+                        <p>R.R.K Sr Sec School</p>
+                        <p>Percentage: 94.8%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Srijan Social Intern</h3>
+                        <span class="date">June 2023 - July 2023</span>
+                        <p>Manav Seva Yog Kendra</p>
+                        <p>The internship focused on‬
+‭ empowering kids for increasing their yoga and meditation practices for health benefits.‬
+‭</p>
+                    </div>
+                </div>
             </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-          </form>
         </section>
-      </article>
+                <!-- Projects -->
+<section id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+        <!-- Docker Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Containerized SQL</h3>
+                <p>Docker container setup for SQL databases with persistent storage.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Bake</h3>
+                <p>Automated Docker image building with multiple configurations.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Bridge Networking</h3>
+                <p>Implementation of Docker bridge networking for container communication.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Swarm Microservices</h3>
+                <p>Microservices architecture deployed using Docker Swarm.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Docker Volume Persistence</h3>
+                <p>Implementing persistent storage solutions with Docker volumes.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <i class="fab fa-docker"></i>
+            </div>
+            <div class="project-info">
+                <h3>Dockerized Streamlit</h3>
+                <p>Streamlit development environment containerized with Docker.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized_Streamlit_Development" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
 
+        <!-- Kubernetes Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp');">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <div class="project-info">
+                <h3>MiniKube and Kubectl</h3>
+                <p>Local Kubernetes cluster setup and management with MiniKube.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp');">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <div class="project-info">
+                <h3>Minikube Microservices</h3>
+                <p>Microservices deployment on Minikube Kubernetes cluster.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Python Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png');">
+                <i class="fab fa-python"></i>
+            </div>
+            <div class="project-info">
+                <h3>Python Logging in Docker</h3>
+                <p>Implementing Python logging solutions within Docker containers.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Streamlit Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit EC2</h3>
+                <p>Deploying Streamlit applications on AWS EC2 instances.</p>
+                <a href="https://dockstation-uep5ttav8krlr2cp5ekgvu.streamlit.app/" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card"> 
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit Hello World</h3>
+                <p>Basic Streamlit application demonstrating core features.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-info">
+                <h3>Streamlit App</h3>
+                <p>Custom Streamlit application with interactive components.</p>
+                <a href="https://dockstation-zgddkv5rsyqhkgq2l6d6mq.streamlit.app/" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Database Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/PostgreSQL-Logo-500x313.webp');">
+                <i class="fas fa-database"></i>
+            </div>
+            <div class="project-info">
+                <h3>SQL PostgreSQL</h3>
+                <p>PostgreSQL database implementations and queries.</p>
+                <a href="" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- ML Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp');">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="project-info">
+                <h3>Titanic Prediction Model</h3>
+                <p>Machine learning model predicting Titanic survival rates.</p>
+                <a href="https://dockstation-nuaxvofk77zcggdsixfzwk.streamlit.app/" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp');">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="project-info">
+                <h3>Evidently AI</h3>
+                <p>Machine learning model monitoring and evaluation with Evidently AI.</p>
+                <a href="https://github.com/YashSharma1402/DockStation/tree/main/%20Evidently%20AI%20Sets%20Sail%20in%20Docker" class="project-link" target="_blank">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Featured Projects -->
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Job+Portal');">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="project-info">
+                <h3>HiredHub Job Portal</h3>
+                <p>Django-based job searching platform with user authentication.</p>
+                <a href="#" class="project-link">View Details</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Code+Organizer');">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="project-info">
+                <h3>Code Snippet Organizer</h3>
+                <p>Tool for developers to store and organize code snippets (Ongoing).</p>
+                <a href="#" class="project-link">View Details</a>
+            </div>
+        </div>
     </div>
-
-  </main>
-
-  <!-- Custom JS -->
-  <script src="./assets/js/script.js"></script>
-
-  <!-- Ion Icons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+</section>
+ <!-- Multi-Page Streamlit App -->
+<div class="project-card featured-project">
+    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png');">
+        <i class="fas fa-layer-group"></i>
+    </div>
+    <div class="project-info">
+        <h3>ML Pipeline Dashboard</h3>
+        <p class="featured-badge">Featured Project</p>
+        <p>A multi-container Streamlit application with:</p>
+        <ul>
+            <li>Data preprocessing pipeline</li>
+            <li>Model training interface</li>
+            <li>SHAP explainability dashboard</li>
+            <li>Dockerized microservices</li>
+        </ul>
+        <div class="project-links">
+            <a href="https://multipage-application.onrender.com/" class="project-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/ritu-pixel/MultiPage-" class="project-link github-link" target="_blank">
+                <i class="fab fa-github"></i> Source Code
+            </a>
+        </div>
+    </div>
+</div>       
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>AWS Practitioner Essentials</h3>
+                        <p>AWS Academy Graduate - Cloud Practitioner Essentials</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>AWS Cloud Architecting</h3>
+                        <p>AWS Academy Graduate - Cloud Architecting</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>AWS Intro to Cloud</h3>
+                        <p>AWS Academy Graduate - Introduction to Cloud</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:6398497014"><i class="fas fa-phone"></i></a>
+            <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2024 Yash Sharma. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Animate timeline items when they come into view
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
