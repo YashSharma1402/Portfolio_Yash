@@ -7,506 +7,419 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6c5ce7;       /* Lavender purple */
-            --secondary: #a29bfe;     /* Light lavender */
-            --dark: #2d3436;          /* Dark gray */
-            --light: #f5f6fa;         /* Off-white */
-            --accent: #fd79a8;        /* Pink accent */
+            --black: #0d1117;
+            --dark-gray: #161b22;
+            --gray: #8b949e;
+            --light-gray: #c9d1d9;
+            --white: #ffffff;
+            --blue: #58a6ff;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
         
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.5;
         }
         
-        /* Animated floating bubbles */
-        .bg-animation {
+        /* GitHub-like header */
+        .header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 1rem;
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--dark-gray);
         }
         
-        .bg-animation div {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background-color: rgba(108, 92, 231, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            border: 1px solid rgba(162, 155, 254, 0.3);
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
-        }
-
-        /* Header with Profile Photo */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-container {
+        .header-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
         }
-
+        
+        .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-tab {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+        
+        .nav-tab:hover {
+            color: var(--white);
+            background-color: var(--dark-gray);
+        }
+        
+        .nav-tab.active {
+            color: var(--white);
+            font-weight: 600;
+            border-bottom: 2px solid var(--blue);
+        }
+        
+        .resume-btn {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .resume-btn:hover {
+            background-color: var(--black);
+            border-color: var(--light-gray);
+        }
+        
+        /* Main content */
+        .main {
+            max-width: 1280px;
+            margin: 5rem auto 2rem;
+            padding: 0 1rem;
+        }
+        
+        /* Profile section */
+        .profile-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        
         .profile-photo {
-            width: 160px;
-            height: 160px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .profile-photo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-
-        .header-text {
-            max-width: 600px;
-            text-align: left;
+            border: 2px solid var(--light-gray);
         }
         
-        header h1 {
-            font-size: 2.8rem;
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
-            animation: fadeInDown 1s ease;
         }
         
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .profile-title {
+            color: var(--gray);
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            font-size: 1.1rem;
         }
-
+        
+        .profile-bio {
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
         .contact-info {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
         
-        .contact-info a {
-            color: white;
+        .contact-link {
+            color: var(--black);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            background-color: rgba(255,255,255,0.1);
+            gap: 0.3rem;
+            font-size: 0.9rem;
         }
         
-        .contact-info a:hover {
-            transform: translateY(-3px);
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        /* Project Thumbnails */
-        .project-thumbnail {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s ease;
-        }
-
-        .project-thumbnail::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(108, 92, 231, 0.85), rgba(162, 155, 254, 0.85));
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .project-thumbnail::before {
-            opacity: 0.6;
-        }
-
-        .project-thumbnail i {
-            color: white;
-            font-size: 3rem;
-            z-index: 1;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .project-thumbnail i {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        /* Main container */
-        .container {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
+        .contact-link i {
+            color: var(--gray);
         }
         
-        section {
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease;
+        /* Tab content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
         
-        section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
+        .tab-content.active {
+            display: block;
         }
         
-        section h2::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 70%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
         /* About section */
         .about-content {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
         }
         
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            line-height: 1.7;
-        }
-        
-        .skills {
-            flex: 1;
-            min-width: 300px;
+        .skills-section {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 1rem;
         }
         
         .skill-category {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .skill-category h3 {
-            margin-bottom: 1rem;
-            color: var(--dark);
-            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: var(--black);
         }
         
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.5rem;
         }
         
         .skill-tag {
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            background-color: #ddf4ff;
+            color: #0969da;
+            padding: 0.3rem 0.6rem;
+            border-radius: 2em;
+            font-size: 0.8rem;
+            border: 1px solid rgba(9, 105, 218, 0.2);
         }
         
-        .skill-tag:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--secondary);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-            margin-bottom: 2rem;
-        }
-        
-        .timeline-content {
-            padding: 25px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .timeline-content h3 {
-            color: var(--primary);
-            margin-bottom: 0.7rem;
-            font-size: 1.4rem;
-        }
-        
-        .timeline-content .date {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 0.7rem;
-            display: block;
-            font-size: 1rem;
-        }
-
-        /* Projects grid */
+        /* Projects section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
         }
         
         .project-card {
-            background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 1rem;
+            transition: all 0.2s ease;
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
         }
         
-        .project-info {
-            padding: 1.8rem;
-        }
-        
-        .project-info h3 {
-            margin-bottom: 0.8rem;
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-        
-        .project-info p {
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        
-        .project-link {
-            display: inline-block;
-            padding: 0.7rem 1.5rem;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .project-link:hover {
-            background-color: var(--dark);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(45, 52, 54, 0.2);
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.8rem;
-            transition: transform 0.3s ease;
-            width: 50px;
-            height: 50px;
+        .project-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.1);
+            margin-bottom: 0.8rem;
         }
         
-        .footer-links a:hover {
-            transform: translateY(-5px) scale(1.1);
-            background-color: rgba(255,255,255,0.2);
+        .project-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            color: var(--gray);
         }
-
+        
+        .project-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--blue);
+            text-decoration: none;
+        }
+        
+        .project-title:hover {
+            text-decoration: underline;
+        }
+        
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tech-tag {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+        
+        /* Timeline section */
+        .timeline-item {
+            padding: 1rem;
+            border-left: 2px solid #e1e4e8;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--blue);
+            border: 2px solid var(--white);
+        }
+        
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+        
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-subtitle {
+            font-size: 0.9rem;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Certifications */
+        .certification-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cert-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cert-issuer {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .profile-container {
+            .profile-section {
                 flex-direction: column;
-                text-align: center;
             }
             
-            .header-text {
-                text-align: center;
+            .about-content {
+                grid-template-columns: 1fr;
             }
             
-            header h1 {
-                font-size: 2.2rem;
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
             }
             
-            .timeline::before {
-                left: 31px;
-            }
-            
-            .timeline-item {
+            .nav-tabs {
                 width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-item::after {
-                left: 21px;
-            }
-            
-            .contact-info a {
-                padding: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
             }
         }
-
-        /* Animation delays for project cards */
-        .project-card {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        .project-card:nth-child(4) { animation-delay: 0.4s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.6s; }
-        .project-card:nth-child(7) { animation-delay: 0.7s; }
-        .project-card:nth-child(8) { animation-delay: 0.8s; }
-        .project-card:nth-child(9) { animation-delay: 0.9s; }
-        .project-card:nth-child(10) { animation-delay: 1s; }
     </style>
 </head>
 <body>
-    <!-- Animated background bubbles -->
-    <div class="bg-animation">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    
-    <!-- Header with Profile Photo -->
-    <header>
-        <div class="profile-container">
-            <!-- Replace with your photo -->
-            <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" class="profile-photo">
-            <div class="header-text">
-                <h1>Yash Sharma</h1>
-                <p>Computer Science Student | Full Stack Developer | Cloud Enthusiast</p>
-                <div class="contact-info">
-                    <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="tel:6398497014"><i class="fas fa-phone"></i> Call</a>
-                    <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </div>
+    <!-- GitHub-like header with tabs -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">Yash Sharma</a>
+            <div class="nav-tabs">
+                <a href="#about" class="nav-tab active" data-tab="about">About</a>
+                <a href="#projects" class="nav-tab" data-tab="projects">Projects</a>
+                <a href="#experience" class="nav-tab" data-tab="experience">Experience</a>
+                <a href="#certifications" class="nav-tab" data-tab="certifications">Certifications</a>
             </div>
+            <a href="#" class="resume-btn">
+                <i class="fas fa-download"></i> Resume
+            </a>
         </div>
     </header>
     
-    <div class="container">
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a Computer Science student specializing in CCVT at the University of Petroleum Energies and Studies, Dehradun. Passionate about full-stack development, cloud computing, and creating impactful projects that solve real-world problems.</p>
-                    <p>With a strong foundation in both frontend and backend technologies, I enjoy building complete solutions from concept to deployment. My AWS certifications demonstrate my commitment to cloud technologies and scalable architectures.</p>
+    <main class="main">
+        <!-- Profile section -->
+        <section class="profile-section">
+            <img src="https://raw.githubusercontent.com/YashSharma1402/photo/refs/heads/main/port.jpeg" class="profile-photo">
+            <div class="profile-info">
+                <h1 class="profile-name">Yash Sharma</h1>
+                <p class="profile-title">Computer Science Student | Full Stack Developer | Cloud Enthusiast</p>
+                <p class="profile-bio">
+                    I'm a Computer Science student specializing in CCVT at the University of Petroleum Energies and Studies, Dehradun. 
+                    Passionate about full-stack development, cloud computing, and creating impactful projects.
+                </p>
+                <div class="contact-info">
+                    <a href="mailto:sharmayashchd500@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="tel:6398497014" class="contact-link">
+                        <i class="fas fa-phone"></i> Call
+                    </a>
+                    <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank" class="contact-link">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/YashSharma1402" target="_blank" class="contact-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
                 </div>
-                <div class="skills">
+            </div>
+        </section>
+        
+        <!-- About Tab -->
+        <div id="about" class="tab-content active">
+            <div class="about-content">
+                <div>
+                    <h2>About Me</h2>
+                    <p>
+                        With a strong foundation in both frontend and backend technologies, I enjoy building complete solutions from concept to deployment. 
+                        My AWS certifications demonstrate my commitment to cloud technologies and scalable architectures.
+                    </p>
+                    <p>
+                        I'm particularly interested in containerization technologies like Docker and Kubernetes, and have implemented several projects 
+                        demonstrating these skills. My goal is to create efficient, scalable systems that solve real-world problems.
+                    </p>
+                </div>
+                <div class="skills-section">
                     <div class="skill-category">
                         <h3>Databases & Languages</h3>
                         <div class="skill-tags">
@@ -539,342 +452,473 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- Education & Experience -->
-        <section id="timeline">
-            <h2>Education & Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>B.Tech. in Computer Science (CCVT)</h3>
-                        <span class="date">2022 - 2026</span>
-                        <p>University of Petroleum Energies and Studies, Dehradun</p>
-                        <p>CGPA: 7.3</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Higher Secondary School</h3>
-                        <span class="date">2018 - 2019</span>
-                        <p>R.R.K Sr Sec School></p>
-                        <p>Percentage: 90%</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Secondary High School</h3>
-                        <span class="date">2020 - 2021</span>
-                        <p>R.R.K Sr Sec School</p>
-                        <p>Percentage: 94.8%</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Srijan Social Intern</h3>
-                        <span class="date">June 2023 - July 2023</span>
-                        <p>Manav Seva Yog Kendra</p>
-                        <p>The internship focused on‬
-‭ empowering kids for increasing their yoga and meditation practices for health benefits.‬
-‭</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-                <!-- Projects -->
-<section id="projects">
-    <h2>My Projects</h2>
-    <div class="projects-grid">
+        <!-- Projects Tab -->
+        <!-- Projects Tab -->
+<div id="projects" class="tab-content">
+    <div class="projects-container">
         <!-- Docker Projects -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/containerized%20sql.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">SQL</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Containerized SQL</h3>
-                <p>Docker container setup for SQL databases with persistent storage.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" target="_blank">View Project</a>
+                <p>Docker container setup for SQL databases with persistent storage and automated backups.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Containerized%20MySQL" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker-bake.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Automation</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Docker Bake</h3>
-                <p>Automated Docker image building with multiple configurations.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" class="project-link" target="_blank">View Project</a>
+                <p>Automated multi-architecture Docker image building with GitHub Actions.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bake" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20bridge%20networking.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Networking</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Docker Bridge Networking</h3>
-                <p>Implementation of Docker bridge networking for container communication.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" class="project-link" target="_blank">View Project</a>
+                <p>Custom bridge networks for secure container communication with DNS resolution.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Bridge" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20swarm.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker Swarm</span>
+                    <span class="tech-badge">Microservices</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Docker Swarm Microservices</h3>
-                <p>Microservices architecture deployed using Docker Swarm.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" class="project-link" target="_blank">View Project</a>
+                <p>Highly available microservices architecture with load balancing and service discovery.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20swarm%20" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20volume%20persistence.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Storage</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Docker Volume Persistence</h3>
-                <p>Implementing persistent storage solutions with Docker volumes.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" class="project-link" target="_blank">View Project</a>
+                <p>Persistent storage solutions with Docker volumes and NFS backups.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Docker%20Volume%20Persistence" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
-                <i class="fab fa-docker"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Streamlit</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Dockerized Streamlit</h3>
-                <p>Streamlit development environment containerized with Docker.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized_Streamlit_Development" class="project-link" target="_blank">View Project</a>
+                <p>Production-ready Streamlit apps with Docker Compose and CI/CD pipelines.</p>
+                <div class="project-links">
+                    <a href="https://app-2-nwdfknqlkijjtvct96efsg.streamlit.app/" class="project-link demo-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Dockerized%20Streamlit%20Development%20Environment" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- Kubernetes Projects -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp');">
-                <i class="fas fa-cubes"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/minikube.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Kubernetes</span>
+                    <span class="tech-badge">Minikube</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>MiniKube and Kubectl</h3>
-                <p>Local Kubernetes cluster setup and management with MiniKube.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" class="project-link" target="_blank">View Project</a>
+                <p>Local Kubernetes development environment with custom resource definitions.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20with%20Docker" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp');">
-                <i class="fas fa-cubes"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/microserviceskubetcl.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Kubernetes</span>
+                    <span class="tech-badge">Microservices</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Minikube Microservices</h3>
-                <p>Microservices deployment on Minikube Kubernetes cluster.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" class="project-link" target="_blank">View Project</a>
+                <p>Kubernetes-native microservices with ingress controllers and horizontal pod autoscaling.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Minikube%20MicroServices" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <!-- Python Projects -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png');">
-                <i class="fab fa-python"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-03-31%20225308.png');">
+                <div class="project-tech">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Docker</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Python Logging in Docker</h3>
-                <p>Implementing Python logging solutions within Docker containers.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python-logging-Docker" class="project-link" target="_blank">View Project</a>
+                <p>Centralized logging solution for Python apps with ELK stack integration.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Python%20Logging%20Application%20with%20Docker" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <!-- Streamlit Projects -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp');">
-                <i class="fas fa-chart-line"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlit-logo-secondary-colormark-darktext.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Streamlit</span>
+                    <span class="tech-badge">AWS</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Streamlit EC2</h3>
-                <p>Deploying Streamlit applications on AWS EC2 instances.</p>
-                <a href="https://dockstation-uep5ttav8krlr2cp5ekgvu.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                <p>Auto-scaling Streamlit applications on AWS with Terraform provisioning.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Deploying%20a%20Streamlit%20App%20in%20Docker%20on%20AWS%20EC2" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card"> 
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp');">
-                <i class="fas fa-chart-line"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/streamlitt.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Streamlit</span>
+                    <span class="tech-badge">Python</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Streamlit Hello World</h3>
-                <p>Basic Streamlit application demonstrating core features.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" class="project-link" target="_blank">View Project</a>
+                <p>Template for building production-grade Streamlit applications.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/DOCKER_BASICS" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
-                <i class="fas fa-chart-line"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/docker%20streamlit.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Streamlit</span>
+                    <span class="tech-badge">Docker</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Streamlit App</h3>
-                <p>Custom Streamlit application with interactive components.</p>
-                <a href="https://dockstation-zgddkv5rsyqhkgq2l6d6mq.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                <p>Multi-container Streamlit application with Redis caching and Celery tasks.</p>
+                <div class="project-links">
+                    <a href="https://dockstation-zgddkv5rsyqhkgq2l6d6mq.streamlit.app/" class="project-link demo-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/streamlit-app" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
-        <!-- Database Projects -->
-        <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/PostgreSQL-Logo-500x313.webp');">
-                <i class="fas fa-database"></i>
-            </div>
-            <div class="project-info">
-                <h3>SQL PostgreSQL</h3>
-                <p>PostgreSQL database implementations and queries.</p>
-                <a href="" class="project-link" target="_blank">View Project</a>
-            </div>
-        </div>
-        
+
+     
+
         <!-- ML Projects -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp');">
-                <i class="fas fa-brain"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/tpm.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">Machine Learning</span>
+                    <span class="tech-badge">Python</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Titanic Prediction Model</h3>
-                <p>Machine learning model predicting Titanic survival rates.</p>
-                <a href="https://dockstation-nuaxvofk77zcggdsixfzwk.streamlit.app/" class="project-link" target="_blank">View Project</a>
+                <p>End-to-end ML pipeline with feature engineering and model explainability.</p>
+                <div class="project-links">
+                    <a href="https://titanic-syaioyizxdgkabgpyv9uua.streamlit.app/" class="project-link demo-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Titanic-Prediction-Model" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp');">
-                <i class="fas fa-robot"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/evidently%20ai.webp');">
+                <div class="project-tech">
+                    <span class="tech-badge">ML Monitoring</span>
+                    <span class="tech-badge">Evidently AI</span>
+                </div>
             </div>
             <div class="project-info">
                 <h3>Evidently AI</h3>
-                <p>Machine learning model monitoring and evaluation with Evidently AI.</p>
-                <a href="https://github.com/YashSharma1402/DockStation/tree/main/%20Evidently%20AI%20Sets%20Sail%20in%20Docker" class="project-link" target="_blank">View Project</a>
+                <p>Production ML monitoring with data drift detection and performance metrics.</p>
+                <div class="project-links">
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Evidently%20AI%20Sets%20Sail%20in%20Docker" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
             </div>
         </div>
-        
-        <!-- Featured Projects -->
+
+        <!-- Featured Project -->
         <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Job+Portal');">
-                <i class="fas fa-briefcase"></i>
+            <div class="project-image" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png');">
+                <div class="project-tech">
+                    <span class="tech-badge">Streamlit</span>
+                    <span class="tech-badge">ML Pipeline</span>
+                    <span class="tech-badge">Docker</span>
+                </div>
             </div>
             <div class="project-info">
-                <h3>HiredHub Job Portal</h3>
-                <p>Django-based job searching platform with user authentication.</p>
-                <a href="#" class="project-link">View Details</a>
+                <h3>ML Pipeline Dashboard</h3>
+                <p>A production-grade ML application featuring containerized microservices architecture, automated data validation, and CI/CD deployment pipeline.</p>
+                <div class="project-links">
+                    <a href="https://dockstation-dchzeqibqdkdtt5qwj3amm.streamlit.app/" class="project-link demo-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/YashSharma1402/DockStation/tree/main/Multipage-DataScience-Dashboard" class="project-link code-link" target="_blank">
+                        <i class="fab fa-github"></i> Source Code
+                    </a>
+                </div>
             </div>
         </div>
+    </div>
+</div>
         
-        <div class="project-card">
-            <div class="project-thumbnail" style="background-image: url('https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Code+Organizer');">
-                <i class="fas fa-code"></i>
-            </div>
-            <div class="project-info">
-                <h3>Code Snippet Organizer</h3>
-                <p>Tool for developers to store and organize code snippets (Ongoing).</p>
-                <a href="#" class="project-link">View Details</a>
-            </div>
-        </div>
-    </div>
-</section>
- <!-- Multi-Page Streamlit App -->
-<div class="project-card featured-project">
-    <div class="project-thumbnail" style="background-image: url('https://raw.githubusercontent.com/ritu-pixel/Profile/refs/heads/main/Screenshot%202025-04-01%20011903.png');">
-        <i class="fas fa-layer-group"></i>
-    </div>
-    <div class="project-info">
-        <h3>ML Pipeline Dashboard</h3>
-        <p class="featured-badge">Featured Project</p>
-        <p>A multi-container Streamlit application with:</p>
-        <ul>
-            <li>Data preprocessing pipeline</li>
-            <li>Model training interface</li>
-            <li>SHAP explainability dashboard</li>
-            <li>Dockerized microservices</li>
-        </ul>
-        <div class="project-links">
-            <a href="https://multipage-application.onrender.com/" class="project-link" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-            <a href="https://github.com/ritu-pixel/MultiPage-" class="project-link github-link" target="_blank">
-                <i class="fab fa-github"></i> Source Code
-            </a>
-        </div>
-    </div>
-</div>       
-        <!-- Certifications -->
-        <section id="certifications">
-            <h2>Certifications</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
-                        <i class="fab fa-aws"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>AWS Practitioner Essentials</h3>
-                        <p>AWS Academy Graduate - Cloud Practitioner Essentials</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
-                        <i class="fab fa-aws"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>AWS Cloud Architecting</h3>
-                        <p>AWS Academy Graduate - Cloud Architecting</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-thumbnail" style="background-color: #FF9900; background-image: none;">
-                        <i class="fab fa-aws"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>AWS Intro to Cloud</h3>
-                        <p>AWS Academy Graduate - Introduction to Cloud</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+<style>
+    /* Add this CSS to make the projects more compact */
+    .projects-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem;
+    }
     
-    <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="mailto:sharmayashchd500@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="tel:6398497014"><i class="fas fa-phone"></i></a>
-            <a href="https://www.linkedin.com/in/yash-sharma-0a3778256/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/YashSharma1402" target="_blank"><i class="fab fa-github"></i></a>
+    .project-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        background: white;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .project-image {
+        height: 120px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    
+    .project-tech {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
+    .tech-badge {
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+    }
+    
+    .project-info {
+        padding: 12px;
+    }
+    
+    .project-info h3 {
+        margin: 0 0 8px 0;
+        font-size: 1rem;
+    }
+    
+    .project-info p {
+        margin: 0 0 12px 0;
+        font-size: 0.85rem;
+        color: #555;
+        line-height: 1.4;
+    }
+    
+    .project-links {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        text-decoration: none;
+    }
+    
+    .demo-link {
+        background: #4CAF50;
+        color: white;
+    }
+    
+    .code-link {
+        background: #333;
+        color: white;
+    }
+    
+    .project-link i {
+        font-size: 0.8rem;
+    }
+</style>
+        
+        <!-- Experience Tab -->
+        <div id="experience" class="tab-content">
+            <h2>Education & Experience</h2>
+            <div class="timeline-item">
+                <span class="timeline-date">2022 - 2026</span>
+                <h3 class="timeline-title">B.Tech. in Computer Science (CCVT)</h3>
+                <p class="timeline-subtitle">University of Petroleum Energies and Studies, Dehradun</p>
+                <p class="timeline-desc">CGPA: 7.3</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">2018 - 2019</span>
+                <h3 class="timeline-title">Higher Secondary School</h3>
+                <p class="timeline-subtitle">R.R.K Sr Sec School</p>
+                <p class="timeline-desc">Percentage: 90%</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">2020 - 2021</span>
+                <h3 class="timeline-title">Secondary High School</h3>
+                <p class="timeline-subtitle">R.R.K Sr Sec School</p>
+                <p class="timeline-desc">Percentage: 94.8%</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">June 2023 - July 2023</span>
+                <h3 class="timeline-title">Srijan Social Intern</h3>
+                <p class="timeline-subtitle">Manav Seva Yog Kendra</p>
+                <p class="timeline-desc">
+                    The internship focused on empowering kids for increasing their yoga and meditation practices for health benefits.
+                </p>
+            </div>
         </div>
-        <p>&copy; 2024 Yash Sharma. All rights reserved.</p>
-    </footer>
+        
+        <!-- Certifications Tab -->
+        <div id="certifications" class="tab-content">
+            <h2>Certifications</h2>
+            <div class="certification-card">
+                <h3 class="cert-title">AWS Practitioner Essentials</h3>
+                <p class="cert-issuer">AWS Academy Graduate - Cloud Practitioner Essentials</p>
+            </div>
+            <div class="certification-card">
+                <h3 class="cert-title">AWS Cloud Architecting</h3>
+                <p class="cert-issuer">AWS Academy Graduate - Cloud Architecting</p>
+            </div>
+            <div class="certification-card">
+                <h3 class="cert-title">AWS Intro to Cloud</h3>
+                <p class="cert-issuer">AWS Academy Graduate - Introduction to Cloud</p>
+            </div>
+        </div>
+    </main>
     
     <script>
-        // Animate timeline items when they come into view
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // Tab switching functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Update URL hash
+                window.location.hash = tabId;
             });
-        }, { threshold: 0.1 });
-        
-        timelineItems.forEach(item => {
-            observer.observe(item);
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Check URL hash on load
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const tab = document.querySelector(`.nav-tab[data-tab="${hash}"]`);
+                if (tab) {
+                    tab.click();
+                }
+            }
         });
     </script>
 </body>
